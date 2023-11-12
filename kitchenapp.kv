@@ -1,0 +1,111 @@
+#:kivy 2.2.1
+
+<MainWindow>:
+    orientation: 'vertical'
+
+    MDBottomNavigation:
+
+        selected_color_background: "blue"
+        text_color_active: "lightblue"
+
+        MDBottomNavigationItem:
+            name: "screen receipt"
+            text: "Рецепты"
+            icon: "book-outline"
+
+            ScrollView:
+                MDList:
+
+                    OneLineAvatarIconListItem:
+                        text: "Курица"
+                        on_release: print("Click!")
+
+                        IconLeftWidget:
+                            icon: "food-drumstick-outline"
+
+                    OneLineAvatarIconListItem:
+                        text: "Свинина"
+                        on_release: print("Click!")
+
+                        IconLeftWidget:
+                            icon: "food-steak"
+
+                    OneLineAvatarIconListItem:
+                        text: "Из теста"
+                        on_release: print("Click!")
+
+                        IconLeftWidget:
+                            icon: "food-croissant"
+
+                    OneLineAvatarIconListItem:
+                        text: "Закуски"
+                        on_release: print("Click!")
+
+                        IconLeftWidget:
+                            icon: "food-hot-dog"
+
+                    OneLineAvatarIconListItem:
+                        text: "Напитки"
+                        on_release: print("Click!")
+
+                        IconLeftWidget:
+                            icon: "beer-outline"
+
+                    OneLineAvatarIconListItem:
+                        text: "Другое"
+                        on_release: print("Click!")
+
+                        IconLeftWidget:
+                            icon: "food-outline"
+
+
+            MDFloatingActionButton:
+                icon: "magnify"
+                md_bg_color: app.theme_cls.primary_dark
+                icon_size: "22sp"
+                pos_hint: {"center_x": .9, "center_y": .1 }
+
+                on_release:
+                    app.open_modal_view()
+
+
+        MDBottomNavigationItem:
+            name: "screen friends"
+            text: "Друзья"
+            icon: "account-multiple-outline"
+
+        MDBottomNavigationItem:
+            name: "screen profile"
+            text: "Профиль"
+            icon: "cat"
+
+<ReceiptsItem>:
+    IconLeftWidget:
+        icon: "food-drumstick-outline"
+    RightButton:
+        icon: "heart-outline"
+
+
+<MyModalView>:
+    size_hint: (0.5, None)
+    height: dp(36)  # Высота модального окна
+
+    BoxLayout:
+        orientation: "horizontal"
+        size_hint: (1, 1)
+
+        TextInput:
+            id: text_input
+            multiline: False
+            hint_text: "Введи название блюда"
+            size_hint_x: 0.8  # Ширина TextInput
+
+
+        MDRaisedButton:
+            text: "Искать"
+            on_release:
+                root.search(text_input.text)
+                root.dismiss()
+            size_hint_x: 0.1  # Ширина MDRaisedButton
+            height: text_input.height
+
